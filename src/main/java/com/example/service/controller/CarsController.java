@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/cars/")
 @RestController
 @RequiredArgsConstructor
-@Validated
 public class CarsController {
 
     private final CarsService carsService;
