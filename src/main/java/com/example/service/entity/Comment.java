@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.example.service.entity.Users;
+import java.util.List;
+import com.example.service.entity.Cars;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +17,16 @@ import lombok.NoArgsConstructor;
 public class Comment {
     @Id
     private Integer id;
-    private String com;
+
+    @Column(nullable = false)
+    private String commentContent;
+
+    @ManyToOne
+    @JoinColumn(name="users_id", nullable = false)
+    private Users userOne;
+
+    @ManyToOne
+    @JoinColumn(name="cars_id")
+    private Cars car;
 
 }
