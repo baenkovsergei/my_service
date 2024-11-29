@@ -3,6 +3,7 @@ package com.example.service.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class Users {
     @Column(nullable = false)
     private String name;
 
+    @Getter
     @OneToMany(mappedBy="userOne")
     private List<Comment> comments;
 
