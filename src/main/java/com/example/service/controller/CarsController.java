@@ -33,4 +33,15 @@ public class CarsController {
         return ResponseEntity.ok().body(carsService.saveCars(car));
     }
 
+    @PutMapping("/")
+    public ResponseEntity<Cars> updateCar(@RequestBody Cars car) {
+        return ResponseEntity.ok().body(carsService.updateCars(car));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cars> deleteCar(@PathVariable Integer id) {
+        carsService.deleteById(id);
+        return ResponseEntity.ok().body(null);
+    }
+
 }

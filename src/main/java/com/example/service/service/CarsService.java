@@ -31,6 +31,12 @@ public class CarsService {
         return savedCar;
     }
 
+    public Cars updateCars (Cars car) {
+        Optional<Cars> optionalCars = carsRepo.findById(car.getId());
+        Cars updatedCar = carsRepo.save(car);
+        return updatedCar;
+    }
+
     public void deleteById(Integer id) {
         carsRepo.deleteById(id);
     }
