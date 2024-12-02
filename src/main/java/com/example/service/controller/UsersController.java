@@ -3,17 +3,14 @@ package com.example.service.controller;
 import com.example.service.dto.CommentDTO;
 import com.example.service.entity.Users;
 import com.example.service.service.UsersService;
-import com.example.service.entity.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@RequestMapping("/users/")
 @RestController
+@RequestMapping("/users/")
 @RequiredArgsConstructor
 public class UsersController {
 

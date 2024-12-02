@@ -18,6 +18,7 @@ public class CommentService {
     private final CommentRepo commentRepo;
     private final CommentMapper commentMapper = new CommentMapper();
 
+
     public CommentDTO getComDto (Integer id){
         Optional<CommentDTO> comment = commentRepo.findById(id).map(commentMapper::toCommentDTO);
         if (comment.isPresent()){

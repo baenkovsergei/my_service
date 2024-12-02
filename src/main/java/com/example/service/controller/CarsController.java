@@ -4,14 +4,13 @@ import com.example.service.entity.Cars;
 import com.example.service.service.CarsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RequestMapping("/cars/")
 @RestController
+@RequestMapping("/cars/")
 @RequiredArgsConstructor
 public class CarsController {
 
