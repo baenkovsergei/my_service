@@ -1,5 +1,6 @@
 package com.example.service.controller;
 
+import com.example.service.dto.CommentDTO;
 import com.example.service.entity.Users;
 import com.example.service.service.UsersService;
 import com.example.service.entity.Comment;
@@ -24,8 +25,7 @@ public class UsersController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Comment>> getUserComments(@RequestParam("userId") Integer userId) {
+    public ResponseEntity<List<CommentDTO>> getUserComments(@RequestParam("userId") Integer userId) {
         return ResponseEntity.ok(usersService.getCommentsByUserId(userId));
-
     }
 }
