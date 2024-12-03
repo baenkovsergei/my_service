@@ -5,6 +5,7 @@ import com.example.service.dto.CarsDTO;
 import com.example.service.mapper.CarsMapper;
 import com.example.service.service.CarsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,8 @@ import java.util.List;
 public class CarsController {
 
     private final CarsService carsService;
-    private final CarsMapper carsMapper = new CarsMapper();
+    @Autowired
+    private final CarsMapper carsMapper;
 
     @GetMapping("/")
     public ResponseEntity<List<Cars>> getAllCars(){
@@ -26,17 +28,17 @@ public class CarsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(carsService.getCarByIdDTO(id));
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id)));
     }
 
     @PostMapping("/")
-    public ResponseEntity<Cars> saveCar(@RequestBody Cars car) {
-        return ResponseEntity.ok().body(carsService.saveCars(car));
+    public ResponseEntity<CarsDTO> saveCar(@RequestBody Cars car) {
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.saveCars(car)));
     }
 
     @PutMapping("/")
-    public ResponseEntity<Cars> updateCar(@RequestBody Cars car) {
-        return ResponseEntity.ok().body(carsService.updateCars(car));
+    public ResponseEntity<CarsDTO> updateCar(@RequestBody Cars car) {
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.updateCars(car)));
     }
 
     @DeleteMapping("/{id}")

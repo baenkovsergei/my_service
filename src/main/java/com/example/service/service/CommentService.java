@@ -17,16 +17,6 @@ import java.util.Optional;
 public class CommentService {
 
     private final CommentRepo commentRepo;
-    @Autowired
-    private final CommentMapper commentMapper;
-
-    public CommentDTO getComDto (Integer id){
-        Optional<CommentDTO> comment = commentRepo.findById(id).map(commentMapper::toCommentDTO);
-        if (comment.isPresent()){
-            return comment.get();
-        }
-        return null;
-    }
 
     public Comment getComById(Integer id) {
         Optional<Comment> optionalComment = commentRepo.findById(id);

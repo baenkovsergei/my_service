@@ -19,9 +19,16 @@ public class CategoryService {
     @Autowired
     private final CategoryMapper categoryMapper;
 
-
     public List<Category> findAll() {
         return categoryRepo.findAll();
+    }
+
+    public Category getCategoryById(Integer id) {
+        Optional<Category> category = categoryRepo.findById(id);
+        if (category.isPresent()) {
+            return category.get();
+        }
+        return null;
     }
 
     public CategoryDTO getCatById(Integer id) {

@@ -2,10 +2,12 @@ package com.example.service.controller;
 
 import com.example.service.dto.CommentDTO;
 import com.example.service.entity.Comment;
+import com.example.service.mapper.CommentMapper;
 import com.example.service.service.CommentService;
 import com.example.service.service.CarsService;
 import com.example.service.service.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +21,13 @@ public class CommentController {
    public final CommentService commentService;
    private final UsersService usersService;
    private final CarsService carsService;
+   @Autowired
+   private final CommentMapper commentMapper;
 
    //WORK
    @GetMapping("/{id}")
    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") Integer id) {
-      return ResponseEntity.ok().body(commentService.getComDto(id));
+      return ResponseEntity.ok().body(commentMapper.toCommentDTO(commentService.getComById(id)));
    }
 
    //WORK

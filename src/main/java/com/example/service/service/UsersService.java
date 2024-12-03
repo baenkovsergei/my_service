@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 public class UsersService {
 
     private final UsersRepo usersRepo;
-    private final CommentMapper commentMapper = new CommentMapper();
 
     public Users save(Users users) {
         return usersRepo.save(users);
@@ -32,14 +31,12 @@ public class UsersService {
         return null;
     }
 
-    public List<CommentDTO> getCommentsByUserId (Integer id) {
+    public List<Comment> getCommentById(Integer id) {
         Optional<Users> optionalUser = usersRepo.findById(id);
         if (optionalUser.isPresent()) {
-            return commentMapper.toCommentDTO(optionalUser.get().getComments());
+            return optionalUser.get().getComments();
         }
         return null;
     }
-
-
 
 }
