@@ -24,12 +24,6 @@ public class CarsController {
         return ResponseEntity.ok().body(carsService.getAllCars());
     }
 
-    /*
-    @GetMapping("/{id}")
-    public ResponseEntity<Cars> getCarById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(carsService.getCarById(id));
-    }
-    */
     @GetMapping("/{id}")
     public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(carsService.getCarByIdDTO(id));
