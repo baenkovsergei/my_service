@@ -1,10 +1,15 @@
 package com.example.service.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import com.example.service.entity.Users;
-import java.util.List;
-import com.example.service.entity.Cars;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +30,4 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="cars_id")
     private Cars car;
-
-
 }

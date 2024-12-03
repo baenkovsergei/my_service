@@ -14,5 +14,4 @@ public class CommentDTO {
        this.author = author;
        this.car = car;
     }
-
 }

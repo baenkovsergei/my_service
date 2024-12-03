@@ -1,14 +1,12 @@
 package com.example.service.entity;
 
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
-import com.example.service.entity.Category;
-import com.example.service.entity.Comment;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +18,7 @@ public class Cars {
     private Integer id;
     private String model;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "car_categories",
             joinColumns = @JoinColumn(name = "cars_id"),

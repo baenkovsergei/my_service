@@ -1,13 +1,10 @@
 package com.example.service.service;
 
-import com.example.service.dto.CommentDTO;
-import com.example.service.entity.Cars;
 import com.example.service.entity.Users;
 import com.example.service.entity.Comment;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.service.mapper.CommentMapper;
 import com.example.service.repository.UsersRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,6 +34,10 @@ public class UsersService {
             return optionalUser.get().getComments();
         }
         return null;
+    }
+
+    public List<Users> getAllUsers() {
+        return usersRepo.findAll();
     }
 
 }

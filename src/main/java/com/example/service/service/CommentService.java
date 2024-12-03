@@ -1,14 +1,11 @@
 package com.example.service.service;
-import com.example.service.dto.CommentDTO;
+
 import com.example.service.entity.Comment;
 import com.example.service.repository.CommentRepo;
-import lombok.RequiredArgsConstructor;
-import com.example.service.mapper.CommentMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

@@ -4,6 +4,9 @@ import com.example.service.dto.CarsDTO;
 import com.example.service.entity.Cars;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Component
 public class CarsMapper {
@@ -15,6 +18,10 @@ public class CarsMapper {
         return new CarsDTO(cars.getModel(),
                 categoryMapper.listCatToDto(cars.getCategories()),
                 commentMapper.toCommentDTO(cars.getComments()));
+    }
+
+    public List<CarsDTO> toCarsDTO(List<Cars> cars) {
+        return cars.stream().map(this::toCarsDTO).collect(Collectors.toList());
     }
 
 }

@@ -1,8 +1,4 @@
 package com.example.service.dto;
-
-import com.example.service.entity.Cars;
-import com.example.service.entity.Category;
-import com.example.service.dto.CommentDTO;
 import lombok.Data;
 
 import java.util.List;

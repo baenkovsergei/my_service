@@ -4,6 +4,7 @@ import com.example.service.entity.Cars;
 import com.example.service.dto.CarsDTO;
 import com.example.service.mapper.CarsMapper;
 import com.example.service.service.CarsService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class CarsController {
     private final CarsMapper carsMapper;
 
     @GetMapping("/")
-    public ResponseEntity<List<Cars>> getAllCars(){
-        return ResponseEntity.ok().body(carsService.getAllCars());
+    public ResponseEntity<List<CarsDTO>> getAllCars(){
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getAllCars()));
     }
 
     @GetMapping("/{id}")
