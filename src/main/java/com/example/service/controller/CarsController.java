@@ -1,6 +1,8 @@
 package com.example.service.controller;
 
 import com.example.service.entity.Cars;
+import com.example.service.dto.CarsDTO;
+import com.example.service.mapper.CarsMapper;
 import com.example.service.service.CarsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +17,22 @@ import java.util.List;
 public class CarsController {
 
     private final CarsService carsService;
+    private final CarsMapper carsMapper = new CarsMapper();
 
     @GetMapping("/")
     public ResponseEntity<List<Cars>> getAllCars(){
         return ResponseEntity.ok().body(carsService.getAllCars());
     }
 
+    /*
     @GetMapping("/{id}")
     public ResponseEntity<Cars> getCarById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(carsService.getCarById(id));
+    }
+    */
+    @GetMapping("/{id}")
+    public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(carsService.getCarByIdDTO(id));
     }
 
     @PostMapping("/")

@@ -3,9 +3,7 @@ import com.example.service.dto.CommentDTO;
 import com.example.service.entity.Category;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Data
 public class CategoryDTO {
     private String name;
 

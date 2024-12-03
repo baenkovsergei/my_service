@@ -5,6 +5,7 @@ import com.example.service.entity.Category;
 import com.example.service.mapper.CategoryMapper;
 import com.example.service.repository.CategoryRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,8 @@ import java.util.Optional;
 public class CategoryService {
 
     private final CategoryRepo categoryRepo;
-    private final CategoryMapper categoryMapper = new CategoryMapper();
+    @Autowired
+    private final CategoryMapper categoryMapper;
 
 
     public List<Category> findAll() {

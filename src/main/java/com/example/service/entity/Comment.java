@@ -11,7 +11,6 @@ import com.example.service.entity.Cars;
 @Data
 @Entity
 @Table(name = "comment")
-
 public class Comment {
     @Id
     private Integer id;

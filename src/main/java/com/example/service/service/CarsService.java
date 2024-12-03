@@ -1,6 +1,8 @@
 package com.example.service.service;
 
 import com.example.service.entity.Cars;
+import com.example.service.dto.CarsDTO;
+import com.example.service.mapper.CarsMapper;
 import com.example.service.repository.CarsRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,13 +15,23 @@ import java.util.Optional;
 public class CarsService {
 
     private final CarsRepo carsRepo;
+    private final CarsMapper carsMapper = new CarsMapper();
 
     public List<Cars> getAllCars() {
         return carsRepo.findAll();
     }
 
+
     public Cars getCarById(Integer id) {
         Optional<Cars> optionalCars = carsRepo.findById(id);
+        if (optionalCars.isPresent()) {
+            return optionalCars.get();
+        }
+        return null;
+    }
+
+    public CarsDTO getCarByIdDTO(Integer id) {
+        Optional<CarsDTO> optionalCars = carsRepo.findById(id).map(carsMapper::toCarsDTO);
         if (optionalCars.isPresent()) {
             return optionalCars.get();
         }

@@ -10,10 +10,10 @@ import java.util.List;
 @Data
 public class CarsDTO {
     private String model;
-    private List<Category> categories;
+    private List<CategoryDTO> categories;
     private List<CommentDTO> comment;
 
-    public CarsDTO(String model, List<Category> categories, List<CommentDTO> comment) {
+    public CarsDTO(String model, List<CategoryDTO> categories, List<CommentDTO> comment) {
         this.model = model;
         this.categories = categories;
         this.comment = comment;

@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
 @RestController
 @RequestMapping("/comments/")
 @RequiredArgsConstructor
@@ -21,13 +20,14 @@ public class CommentController {
    private final UsersService usersService;
    private final CarsService carsService;
 
+   //WORK
    @GetMapping("/{id}")
    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") Integer id) {
       return ResponseEntity.ok().body(commentService.getComDto(id));
    }
 
+   //WORK
    @PostMapping("/")
-   //так не получится
    public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,
                                                 @RequestParam(name = "commentContent") String commentContent,
                                                 @RequestParam(name = "user_id") Integer userId,
