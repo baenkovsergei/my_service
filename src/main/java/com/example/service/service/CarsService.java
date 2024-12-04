@@ -3,6 +3,9 @@ package com.example.service.service;
 import com.example.service.entity.Cars;
 import com.example.service.repository.CarsRepo;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,11 +19,16 @@ public class CarsService {
     private final CarsRepo carsRepo;
 
     public List<Cars> getAllCars() {
-        return carsRepo.findAll();
+        return carsRepo.findAllCars(); // Метод из репозитория
+    }
+
+    public Page<Cars> getAllCarsPages(int page, int size) {
+        Pageable carsPage = PageRequest.of(page,size);
+        return carsRepo.findAll(carsPage);
     }
 
     public Cars getCarById(Integer id) {
-        Optional<Cars> optionalCars = carsRepo.findById(id);
+        Optional<Cars> optionalCars = carsRepo.findCarById(id);
         if (optionalCars.isPresent()) {
             return optionalCars.get();
         }

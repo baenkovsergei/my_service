@@ -5,13 +5,16 @@ import com.example.service.dto.CarsDTO;
 import com.example.service.mapper.CarsMapper;
 import com.example.service.service.CarsService;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cars/")
@@ -24,7 +27,37 @@ public class CarsController {
 
     @GetMapping("/")
     public ResponseEntity<List<CarsDTO>> getAllCars(){
-        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getAllCars()));
+        List<Cars> allCars = carsService.getAllCars();
+        List<CarsDTO> carsDTO = carsMapper.toCarsDTO(allCars);
+        return ResponseEntity.ok().body(carsDTO);
+    }
+    @GetMapping("/pages")
+    public ResponseEntity<Page<Cars>> getAllCarsPages(@RequestParam(defaultValue = "0") int page,
+                                                         @RequestParam(defaultValue = "5") int size) {
+        Page<Cars> cars = carsService.getAllCarsPages(page, size);
+        return ResponseEntity.ok().body(cars);
+    }
+
+    //Работает, но вывод некрасивый
+    @GetMapping("/pagesV2")
+    public ResponseEntity<List<Cars>> getAllCarsPagesV2(@RequestParam(defaultValue = "0") int page,
+                                                        @RequestParam(defaultValue = "10") int size) {
+        Page<Cars> pageCars = carsService.getAllCarsPages(page,size);
+        List<Cars> cars = pageCars.getContent();
+        return ResponseEntity.ok().body(cars);
+    }
+
+    //Работает, но смысла нет, много запросов. Для того чтобы работало, необходимо не вызывать данные классов после пагинации
+    //поскольку из-за этого в процессе выполнения маппинга он берёт поля зависимых сущностей, чтобы выполнить их маппинг
+    //Видимо в версии V2 это работает поскольку данные на самом деле не нужны до момента выдачи
+    @GetMapping("/pagesV3")
+    public ResponseEntity<List<CarsDTO>> getAllCarsPagesV3(@RequestParam(defaultValue = "0") int page,
+                                                        @RequestParam(defaultValue = "5") int size) {
+        Page<Cars> carsPage = carsService.getAllCarsPages(page,size);
+        List<Cars> carsList = carsPage.getContent();
+        //List<CarsDTO> cars = carsPage.stream().map(carsMapper::toCarsDTO).collect(Collectors.toList());
+        List<CarsDTO> cars = carsMapper.toCarsDTO(carsList);
+        return ResponseEntity.ok().body(cars);
     }
 
     @GetMapping("/{id}")

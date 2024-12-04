@@ -39,5 +39,4 @@ public class UsersController {
         return ResponseEntity.ok(usersMapper.usersListToDto(usersService.getAllUsers()));
     }
 
-
 }

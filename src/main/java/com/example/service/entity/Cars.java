@@ -18,13 +18,14 @@ public class Cars {
     private Integer id;
     private String model;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "car_categories",
             joinColumns = @JoinColumn(name = "cars_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     List<Category> categories;
+
 
     @OneToMany(mappedBy="car")
     private List<Comment> comments;

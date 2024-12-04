@@ -5,6 +5,7 @@ import java.util.List;
 
 @Data
 public class CarsDTO {
+    
     private String model;
     private List<CategoryDTO> categories;
     private List<CommentDTO> comment;

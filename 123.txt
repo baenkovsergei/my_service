@@ -1,0 +1,74 @@
+Hibernate: select c1_0.id,c1_0.model from cars c1_0 left join car_categories c2_0 on c1_0.id=c2_0.cars_id left join comment c3_0 on c1_0.id=c3_0.cars_id where c1_0.id=?
+Hibernate: select c1_0.cars_id,c1_1.id,c1_1.name from car_categories c1_0 join category c1_1 on c1_1.id=c1_0.category_id where c1_0.cars_id=?
+Hibernate: select c1_0.cars_id,c1_0.id,c1_0.comment_content,uo1_0.id,uo1_0.name from comment c1_0 left join users uo1_0 on uo1_0.id=c1_0.users_id where c1_0.cars_id=?
+
+
+H
+Hibernate:
+    select
+        c1_0.cars_id,
+        c1_1.id,
+        c1_1.name
+    from
+        car_categories c1_0
+    join
+        category c1_1
+            on c1_1.id=c1_0.category_id
+    where
+        c1_0.cars_id=?
+Hibernate:
+    select
+        c1_0.cars_id,
+        c1_0.id,
+        c1_0.comment_content,
+        uo1_0.id,
+        uo1_0.name
+    from
+        comment c1_0
+    left join
+        users uo1_0
+            on uo1_0.id=c1_0.users_id
+    where
+        c1_0.cars_id=?
+
+WITH FETCH EAGER ON CAR_CATEGORIES!!!!!!
+
+Hibernate:
+    select
+        c1_0.cars_id,
+        c1_1.id,
+        c1_1.name
+    from
+        car_categories c1_0
+    join
+        category c1_1
+            on c1_1.id=c1_0.category_id
+    where
+        c1_0.cars_id=?
+Hibernate:
+    select
+        c1_0.cars_id,
+        c1_0.id,
+        c1_0.comment_content,
+        uo1_0.id,
+        uo1_0.name
+    from
+        comment c1_0
+    left join
+        users uo1_0
+            on uo1_0.id=c1_0.users_id
+    where
+        c1_0.cars_id=?
+
+
+v1:
+Hibernate: select c1_0.id,c1_0.model from cars c1_0 offset ? rows fetch first ? rows only
+Hibernate: select count(c1_0.id) from cars c1_0
+Hibernate: select c1_0.cars_id,c1_1.id,c1_1.name from car_categories c1_0 join category c1_1 on c1_1.id=c1_0.category_id where c1_0.cars_id=?
+Hibernate: select c1_0.category_id,c1_1.id,c1_1.model from car_categories c1_0 join cars c1_1 on c1_1.id=c1_0.cars_id where c1_0.category_id=?
+
+V2:
+Hibernate: select c1_0.id,c1_0.model from cars c1_0 offset ? rows fetch first ? rows only
+Hibernate: select count(c1_0.id) from cars c1_0
+Hibernate: select c1_0.cars_id,c1_1.id,c1_1.name from car_categories c1_0 join category c1_1 on c1_1.id=c1_0.category_id where c1_0.cars_id=?
+Hibernate: select c1_0.category_id,c1_1.id,c1_1.model from car_categories c1_0 join cars c1_1 on c1_1.id=c1_0.cars_id where c1_0.category_id=?
