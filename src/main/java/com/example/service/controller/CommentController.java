@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/comments/")
@@ -25,13 +27,20 @@ public class CommentController {
    @Autowired
    private final CommentMapper commentMapper;
 
-   //WORK
    @GetMapping("/{id}")
    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") Integer id) {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(commentService.getComById(id)));
    }
 
-   //WORK
+   //Не работает
+   @GetMapping("/search")
+   public ResponseEntity<List<CommentDTO>> getCommByUsrCar(@RequestParam(name = "name") String name,
+                                                           @RequestParam(name = "model") String model) {
+      List<Comment> comments = commentService.getComByUsrCar(name, model);
+      return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
+   }
+
+
    @PostMapping("/")
    public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,
                                                 @RequestParam(name = "commentContent") String commentContent,

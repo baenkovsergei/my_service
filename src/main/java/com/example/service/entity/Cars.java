@@ -20,7 +20,7 @@ public class Cars {
     private String model;
 
     @ManyToMany
-    //@BatchSize(size = 10)
+    //@BatchSize(size = 10) //FetchType.Eager
     @JoinTable(
             name = "car_categories",
             joinColumns = @JoinColumn(name = "cars_id"),

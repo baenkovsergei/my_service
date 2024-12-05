@@ -24,7 +24,15 @@ public class CarsService {
 
     public Page<Cars> getAllCarsPages(int page, int size) {
         Pageable carsPage = PageRequest.of(page,size);
-        return carsRepo.giveAllCars(carsPage);
+        return carsRepo.getAllCarsPages(carsPage);
+    }
+
+    public Cars getCarByModel(String model) {
+        Cars cars = carsRepo.findByModel(model);
+        if (cars == null) {
+            return null;
+        }
+        return cars;
     }
 
     public Cars getCarById(Integer id) {
