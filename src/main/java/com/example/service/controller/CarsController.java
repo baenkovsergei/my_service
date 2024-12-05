@@ -38,19 +38,10 @@ public class CarsController {
         return ResponseEntity.ok().body(cars);
     }
 
-    //Работает, но вывод некрасивый
-    @GetMapping("/pagesV2")
-    public ResponseEntity<List<Cars>> getAllCarsPagesV2(@RequestParam(defaultValue = "0") int page,
-                                                        @RequestParam(defaultValue = "10") int size) {
-        Page<Cars> pageCars = carsService.getAllCarsPages(page,size);
-        List<Cars> cars = pageCars.getContent();
-        return ResponseEntity.ok().body(cars);
-    }
-
     //Работает, но смысла нет, много запросов. Для того чтобы работало, необходимо не вызывать данные классов после пагинации
     //поскольку из-за этого в процессе выполнения маппинга он берёт поля зависимых сущностей, чтобы выполнить их маппинг
     //Видимо в версии V2 это работает поскольку данные на самом деле не нужны до момента выдачи
-    @GetMapping("/pagesV3")
+    @GetMapping("/pagesV2")
     public ResponseEntity<List<CarsDTO>> getAllCarsPagesV3(@RequestParam(defaultValue = "0") int page,
                                                         @RequestParam(defaultValue = "5") int size) {
         Page<Cars> carsPage = carsService.getAllCarsPages(page,size);
@@ -59,8 +50,6 @@ public class CarsController {
         List<CarsDTO> cars = carsMapper.toCarsDTO(carsList);
         return ResponseEntity.ok().body(cars);
     }
-
-
 
     @GetMapping("/{id}")
     public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {

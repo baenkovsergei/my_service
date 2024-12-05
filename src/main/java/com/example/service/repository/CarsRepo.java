@@ -14,6 +14,7 @@ import java.util.Optional;
 
 public interface CarsRepo extends JpaRepository<Cars, Integer> {
 
+
     @Query ("""
         select distinct c from Cars c
         left join fetch c.categories cat
@@ -33,10 +34,11 @@ public interface CarsRepo extends JpaRepository<Cars, Integer> {
 
 
     //Не уверен, что EntityGraph ваще работает
+    //Она не используется
     //@EntityGraph(attributePaths = {"comments","categories"})
     @Query ("""
         select c from Cars c
-        left join c.categories cat
+        left join fetch c.categories cat
         left join c.comments comm
     """)
     Page<Cars> giveAllCars(Pageable pageable);

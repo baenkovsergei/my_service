@@ -6,4 +6,21 @@ Service - done
 Controller - done
 Don't change in CarsDTO
 
+Почему FetchType.Eager не работает у аннотации ManyToMany, но работает left join fetch c.categories cat
+и также с @EntityGraph(attributePaths = {"comments"})
+
+Почему Пагинация работает для уменьшения кол-ва запросов, но не работает если потом применять DTO
+
+
+[ALL CARS(DTO), ALL CARS PAGES, ALL CARS PAGES(DTO)]
+
+WITHOUT FETCH AND BATCH:
+    ALL CARS(DOT): 20
+    ALL CARS PAGES: 5
+    ALL CARS PAGES(DTO): 21
+
+WITH fetch categories AND batchsize comments:
+    ALL CARS(DOT): 2
+    ALL CARS PAGES: 4
+    ALL CARS PAGES(DTO): 3
 

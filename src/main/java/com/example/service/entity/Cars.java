@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class Cars {
     private String model;
 
     @ManyToMany
+    //@BatchSize(size = 10)
     @JoinTable(
             name = "car_categories",
             joinColumns = @JoinColumn(name = "cars_id"),
@@ -28,6 +30,7 @@ public class Cars {
 
 
     @OneToMany(mappedBy="car")
+    @BatchSize(size = 10)
     private List<Comment> comments;
 
 }

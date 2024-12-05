@@ -19,12 +19,12 @@ public class CarsService {
     private final CarsRepo carsRepo;
 
     public List<Cars> getAllCars() {
-        return carsRepo.findAllCars(); // Метод из репозитория
+        return carsRepo.findAllCars(); // Метод из репозитория c Query
     }
 
     public Page<Cars> getAllCarsPages(int page, int size) {
         Pageable carsPage = PageRequest.of(page,size);
-        return carsRepo.findAll(carsPage);
+        return carsRepo.giveAllCars(carsPage);
     }
 
     public Cars getCarById(Integer id) {
