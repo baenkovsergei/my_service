@@ -1,6 +1,7 @@
 package com.example.service.controller;
 
 import com.example.service.dto.CommentDTO;
+import com.example.service.entity.Comment;
 import com.example.service.dto.UsersDTO;
 import com.example.service.entity.Users;
 import com.example.service.mapper.CommentMapper;
@@ -28,11 +29,17 @@ public class UsersController {
     public ResponseEntity<Users> createUser(@RequestBody Users users) {
         return ResponseEntity.ok(usersService.save(users));
     }
+    @PostMapping("/{id}/comment")
+    public ResponseEntity<Comment> addComment(@PathVariable Integer id,
+                                                 @RequestParam Comment comment) {
+        return ResponseEntity.ok(usersService.saveComment(id, comment));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<List<CommentDTO>> getUserComments(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(commentMapper.toCommentDTO(usersService.getCommentById(id)));
     }
+
 
     @GetMapping("/")
     public ResponseEntity<List<UsersDTO>> getUsers() {

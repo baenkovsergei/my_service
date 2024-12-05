@@ -1,6 +1,7 @@
 package com.example.service.repository;
 
 import com.example.service.entity.Cars;
+import com.example.service.dto.CarsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -18,6 +19,15 @@ public interface CarsRepo extends JpaRepository<Cars, Integer> {
         left join c.comments comm
     """)
     List<Cars> findAllCars();
+    /*!!!!!!!!!!!!!!!!!!!!
+    @Query("""
+    SELECT new com.example.service.dto.CarsDTO(c.model, cat, comm.commentContent)
+    FROM Cars c
+    LEFT JOIN c.categories cat
+    LEFT JOIN c.comments comm
+""")
+    Page<CarDTO> findAllCarsPageDTO(Pageable pageable);
+    */
 
     //Не уверен, что EntityGraph ваще работает
     //@EntityGraph(attributePaths = {"comments","categories"})

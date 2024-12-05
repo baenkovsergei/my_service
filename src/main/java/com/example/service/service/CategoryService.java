@@ -1,6 +1,5 @@
 package com.example.service.service;
 
-import com.example.service.dto.CategoryDTO;
 import com.example.service.entity.Category;
 import com.example.service.mapper.CategoryMapper;
 import com.example.service.repository.CategoryRepo;
@@ -32,8 +31,8 @@ public class CategoryService {
         return null;
     }
 
-    public CategoryDTO getCatById(Integer id) {
-        Optional<CategoryDTO> optionalCategory = categoryRepo.findById(id).map(categoryMapper::categoryToDto);
+    public Category getCatById(Integer id) {
+        Optional<Category> optionalCategory = categoryRepo.findById(id);
         if (optionalCategory.isPresent()) {
             return optionalCategory.get();
         }

@@ -28,6 +28,14 @@ public class UsersService {
         return null;
     }
 
+    public Comment saveComment( Integer userId, Comment comment) {
+        Optional<Users> optionalUser = usersRepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            optionalUser.get().getComments().add(comment);
+        }
+        return null;
+    }
+
     public List<Comment> getCommentById(Integer id) {
         Optional<Users> optionalUser = usersRepo.findById(id);
         if (optionalUser.isPresent()) {

@@ -17,7 +17,4 @@ public class Category {
     @Id
     private Integer id;
     private String name;
-
-    @ManyToMany(mappedBy = "categories")
-    List<Cars> cars;
 }

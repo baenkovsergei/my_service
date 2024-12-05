@@ -1,6 +1,7 @@
 package com.example.service.controller;
 
 import com.example.service.dto.CategoryDTO;
+import com.example.service.entity.Category;
 import com.example.service.mapper.CategoryMapper;
 import com.example.service.service.CategoryService;
 
@@ -22,12 +23,12 @@ public class CategoryController {
     private final CategoryMapper categoryMapper;
 
     @GetMapping("/")
-    public ResponseEntity<List<CategoryDTO>> getAll() {
-        return ResponseEntity.ok(categoryMapper.listCatToDto(categoryService.findAll()));
+    public ResponseEntity<List<Category>> getAll() {
+        return ResponseEntity.ok(categoryService.findAll());
     }
 
     @GetMapping ("/{id}")
-    public ResponseEntity<CategoryDTO> getById2(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(categoryMapper.categoryToDto(categoryService.getCategoryById(id)));
+    public ResponseEntity<Category> getById2(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
 }

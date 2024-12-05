@@ -14,11 +14,10 @@ import java.util.stream.Collectors;
 public class CarsMapper {
 
     private final CommentMapper commentMapper;
-    private final CategoryMapper categoryMapper;
 
     public CarsDTO toCarsDTO(Cars cars) {
         return new CarsDTO(cars.getModel(),
-                categoryMapper.listCatToDto(cars.getCategories()),
+                cars.getCategories(),
                 commentMapper.toCommentDTO(cars.getComments()));
     }
 
