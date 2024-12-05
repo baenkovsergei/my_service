@@ -1,6 +1,5 @@
 package com.example.service.controller;
 
-import com.example.service.dto.CategoryDTO;
 import com.example.service.entity.Category;
 import com.example.service.mapper.CategoryMapper;
 import com.example.service.service.CategoryService;
@@ -19,8 +18,6 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    @Autowired
-    private final CategoryMapper categoryMapper;
 
     @GetMapping("/")
     public ResponseEntity<List<Category>> getAll() {

@@ -17,7 +17,6 @@ import java.util.Optional;
 public class CommentService {
 
     private final CommentRepo commentRepo;
-    //testing
     private final UsersRepo usersRepo;
     private final CarsRepo carsRepo;
 
@@ -29,23 +28,15 @@ public class CommentService {
         return null;
     }
 
-    public List<Comment> getComByUsrCarId(Integer userId, Integer carId) {
-        List<Comment> comments = commentRepo.findCommByUsrCar(userId, carId);
-        if (comments.size() > 0) {
-            return comments;
-        }
-        return null;
-    }
-
-    //Не работает
+    //Неэффективно с точки зрения запросов к базе данных
     public List<Comment> getComByUsrCar(String name,String model){
         Integer usrId = usersRepo.findUsersByUsername(name).getId();
         Integer carId = carsRepo.findByModel(model).getId();
         List<Comment> comments = commentRepo.findCommByUsrCar(usrId,carId);
-        if (comments.size() > 0) {
-            return comments;
+        if (comments.isEmpty()) {
+            return null;
         }
-        return null;
+        return comments;
     }
 
     public Comment saveComment(Comment comment) {

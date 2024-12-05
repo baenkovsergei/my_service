@@ -8,9 +8,6 @@ Don't change in CarsDTO
 
 Почему FetchType.Eager не работает у аннотации ManyToMany, но работает left join fetch c.categories cat
 
-Почему Пагинация работает для уменьшения кол-ва запросов, но не работает если потом применять DTO
-
-
 [ALL CARS(DTO), ALL CARS PAGES, ALL CARS PAGES(DTO)]
 
 WITHOUT FETCH AND BATCH:
@@ -39,6 +36,8 @@ Hibernate: select count(c1_0.id) from cars c1_0 left join car_categories c2_0 on
 Hibernate: select c1_0.cars_id,c1_0.id,c1_0.comment_content,uo1_0.id,uo1_0.name from comment c1_0 left join users uo1_0 on uo1_0.id=c1_0.users_id where c1_0.cars_id = any (?)
 
 
-
+Hibernate: select u1_0.id,u1_0.name from users u1_0 where u1_0.name=?
+Hibernate: select c1_0.id,c2_0.cars_id,c2_1.id,c2_1.name,c1_0.model from cars c1_0 left join car_categories c2_0 on c1_0.id=c2_0.cars_id left join category c2_1 on c2_1.id=c2_0.category_id left join comment c3_0 on c1_0.id=c3_0.cars_id where c1_0.model=?
+Hibernate: select c1_0.id,c2_0.id,c2_0.model,c1_0.comment_content,uo1_0.id,uo1_0.name from comment c1_0 left join users uo1_0 on uo1_0.id=c1_0.users_id left join cars c2_0 on c2_0.id=c1_0.cars_id where c1_0.users_id=? and c1_0.cars_id=?
 
 

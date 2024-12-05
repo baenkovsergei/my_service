@@ -32,7 +32,10 @@ public class CommentController {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(commentService.getComById(id)));
    }
 
-   //Не работает
+   /*Выдаёт три запроса в базу, поскольку в методе сервиса выполняется доступ к трём сущностям через
+   три репозитория, для уменьшения количества запросов необходимо изменить сами сущности(???), поскольку для
+   получения комментариев необходимо знать id пользователя и машины, а чтобы их получить по имени и модели
+   необходимо выполнить запросы в таблицы пользователей и машин соответственно*/
    @GetMapping("/search")
    public ResponseEntity<List<CommentDTO>> getCommByUsrCar(@RequestParam(name = "name") String name,
                                                            @RequestParam(name = "model") String model) {

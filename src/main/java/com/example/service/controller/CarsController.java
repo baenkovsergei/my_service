@@ -50,7 +50,6 @@ public class CarsController {
         return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id)));
     }
 
-    //Не работает
     @GetMapping("/search")
     public ResponseEntity<CarsDTO> searchCars(@RequestParam("model") String model) {
         return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarByModel(model)));
