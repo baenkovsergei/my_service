@@ -18,7 +18,6 @@ public class Comment {
     @Column(nullable = false)
     private String commentContent;
 
-
     @ManyToOne
     @JoinColumn(name="users_id") //nullable = false
     private Users userOne;
