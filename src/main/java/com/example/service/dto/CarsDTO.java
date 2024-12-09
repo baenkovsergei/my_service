@@ -4,15 +4,16 @@ import lombok.Data;
 
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class CarsDTO {
     
     private String model;
-    private List<Category> categories;
+    private Set<Category> categories;
     private List<CommentDTO> comment;
 
-    public CarsDTO(String model, List<Category> categories, List<CommentDTO> comment) {
+    public CarsDTO(String model, Set<Category> categories, List<CommentDTO> comment) {
         this.model = model;
         this.categories = categories;
         this.comment = comment;

@@ -26,7 +26,5 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="cars_id")
     private Cars car;
-
-
 }
 

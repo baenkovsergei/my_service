@@ -8,13 +8,20 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
+import java.util.Set;
 
 @NamedEntityGraph(
-        name = "car-with-category-and-comm",
+        name = "Cars.allDetails",
         attributeNodes = {
-           @NamedAttributeNode("model"),
-           @NamedAttributeNode("categories"),
-           @NamedAttributeNode("comments"),
+                @NamedAttributeNode("categories"),
+                @NamedAttributeNode(value = "comments", subgraph = "commentsUser")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "commentsUser",
+                        attributeNodes = @NamedAttributeNode("userOne")
+
+                )
         }
 )
 
@@ -35,7 +42,7 @@ public class Cars {
             joinColumns = @JoinColumn(name = "cars_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    List<Category> categories;
+    Set<Category> categories;
 
 
     @OneToMany(mappedBy="car")

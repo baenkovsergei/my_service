@@ -24,5 +24,4 @@ public class Users {
     @OneToMany(mappedBy="userOne")
     @BatchSize(size=10)
     private List<Comment> comments;
-
 }
