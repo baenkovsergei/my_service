@@ -1,5 +1,6 @@
 package com.example.service.service;
 
+import com.example.service.entity.Cars;
 import com.example.service.entity.Comment;
 import com.example.service.repository.CommentRepo;
 import com.example.service.repository.UsersRepo;
@@ -33,6 +34,14 @@ public class CommentService {
         Integer usrId = usersRepo.findUsersByUsername(name).getId();
         Integer carId = carsRepo.findByModel(model).getId();
         List<Comment> comments = commentRepo.findCommByUsrCar(usrId,carId);
+        if (comments.isEmpty()) {
+            return null;
+        }
+        return comments;
+    }
+
+    public List<Comment> getComByUsrCar2(String name,String model){
+        List<Comment> comments = commentRepo.findCommByUsrCar(name,model);
         if (comments.isEmpty()) {
             return null;
         }

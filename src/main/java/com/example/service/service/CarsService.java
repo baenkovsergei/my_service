@@ -19,8 +19,17 @@ public class CarsService {
     private final CarsRepo carsRepo;
 
     public List<Cars> getAllCars() {
-        return carsRepo.findAllCars(); // Метод из репозитория c Query
+        //return carsRepo.findAllCars();
+        return carsRepo.findAll(); //Стандартный метод
     }
+
+//    public Cars getCarIdTest(Integer id) {
+//        Cars car = carsRepo.findBy(id);
+//        if (car == null) {
+//            return null;
+//        }
+//        return car;
+//    }
 
     public Page<Cars> getAllCarsPages(int page, int size) {
         Pageable carsPage = PageRequest.of(page,size);
@@ -36,7 +45,7 @@ public class CarsService {
     }
 
     public Cars getCarById(Integer id) {
-        Optional<Cars> optionalCars = carsRepo.findCarById(id);
+        Optional<Cars> optionalCars = carsRepo.findCarById2(id);
         if (optionalCars.isPresent()) {
             return optionalCars.get();
         }

@@ -47,7 +47,7 @@ public class CarsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id)));
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id))); //TESTING(НАДО ВЕРНУТЬ)
     }
 
     @GetMapping("/search")

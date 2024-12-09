@@ -43,6 +43,15 @@ public class CommentController {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
    }
 
+   //Работает через один запрос к базе
+   @GetMapping("/searchV2")
+   public ResponseEntity<List<CommentDTO>> getCommByUsrCar2(@RequestParam(name = "name") String name,
+                                                           @RequestParam(name = "model") String model) {
+      List<Comment> comments = commentService.getComByUsrCar2(name, model);
+      return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
+   }
+
+
 
    @PostMapping("/")
    public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,

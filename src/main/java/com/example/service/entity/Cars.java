@@ -9,6 +9,15 @@ import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
+@NamedEntityGraph(
+        name = "car-with-category-and-comm",
+        attributeNodes = {
+           @NamedAttributeNode("model"),
+           @NamedAttributeNode("categories"),
+           @NamedAttributeNode("comments"),
+        }
+)
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -32,5 +41,4 @@ public class Cars {
     @OneToMany(mappedBy="car")
     @BatchSize(size = 10)
     private List<Comment> comments;
-
 }

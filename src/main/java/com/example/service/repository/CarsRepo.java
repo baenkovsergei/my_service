@@ -2,6 +2,8 @@ package com.example.service.repository;
 
 import com.example.service.entity.Cars;
 
+import com.example.service.entity.Category;
+import com.example.service.entity.Comment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -17,32 +19,42 @@ public interface CarsRepo extends JpaRepository<Cars, Integer> {
         select distinct c from Cars c
         left join fetch c.categories cat
         left join c.comments comm
+        left join comm.userOne
     """)
     List<Cars> findAllCars();
 
     @Query ("""
-        select c distinct from Cars c
-        left join c.categories cat
+        select distinct c from Cars c
+        left join fetch c.categories cat
         left join c.comments comm
     """)
     Page<Cars> getAllCarsPages(Pageable pageable);
 
     @Query("""
-        select cars from Cars cars
+        select distinct cars from Cars cars
         left join fetch cars.categories cat
         left join cars.comments comm
         where cars.model = :model
     """)
     Cars findByModel(String model);
 
-    @EntityGraph(attributePaths = {"categories"})
+    //@EntityGraph(attributePaths = {"categories"})
     @Query("""
     select distinct c from Cars c
     left join fetch c.categories cat
     left join c.comments comm
-    where c.id = :car_id
+    where c.id = :carId
     """)
-    Optional<Cars> findCarById(int car_id);
+    Optional<Cars> findCarById(Integer carId);
+
+    @EntityGraph(attributePaths = {"comments.userOne", "categories"})
+    @Query("""
+    select distinct c from Cars c
+    left join c.categories cat
+    left join c.comments comm
+    where c.id = :carId
+    """)
+    Optional<Cars> findCarById2(Integer carId);
 
 }
 
