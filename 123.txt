@@ -1,9 +1,0 @@
-category delete [List<Cars>]
-CategoryDTO doesnt need
-
-Entity - done
-Service - done
-Controller - done
-Don't change in CarsDTO
-
-

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/comments/")
@@ -25,13 +27,32 @@ public class CommentController {
    @Autowired
    private final CommentMapper commentMapper;
 
-   //WORK
    @GetMapping("/{id}")
    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") Integer id) {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(commentService.getComById(id)));
    }
 
-   //WORK
+   /*Выдаёт три запроса в базу, поскольку в методе сервиса выполняется доступ к трём сущностям через
+   три репозитория, для уменьшения количества запросов необходимо изменить сами сущности(???), поскольку для
+   получения комментариев необходимо знать id пользователя и машины, а чтобы их получить по имени и модели
+   необходимо выполнить запросы в таблицы пользователей и машин соответственно*/
+   @GetMapping("/search")
+   public ResponseEntity<List<CommentDTO>> getCommByUsrCar(@RequestParam(name = "name") String name,
+                                                           @RequestParam(name = "model") String model) {
+      List<Comment> comments = commentService.getComByUsrCar(name, model);
+      return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
+   }
+
+   //Работает через один запрос к базе
+   @GetMapping("/searchV2")
+   public ResponseEntity<List<CommentDTO>> getCommByUsrCar2(@RequestParam(name = "name") String name,
+                                                           @RequestParam(name = "model") String model) {
+      List<Comment> comments = commentService.getComByUsrCar2(name, model);
+      return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
+   }
+
+
+
    @PostMapping("/")
    public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,
                                                 @RequestParam(name = "commentContent") String commentContent,

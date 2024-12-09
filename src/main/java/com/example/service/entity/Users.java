@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ public class Users {
     private String name;
 
     @OneToMany(mappedBy="userOne")
+    @BatchSize(size=10)
     private List<Comment> comments;
 
 }

@@ -4,6 +4,7 @@ import com.example.service.entity.Users;
 import com.example.service.entity.Comment;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.example.service.repository.UsersRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,14 @@ public class UsersService {
         return null;
     }
 
+    public Users getUserByUsername(String username) {
+        Users users = usersRepo.findUsersByUsername(username);
+        if (users != null) {
+            return users;
+        }
+        return null;
+    }
+
     public Comment saveComment(Integer userId, Comment comment) {
         Optional<Users> optionalUser = usersRepo.findById(userId);
         if (optionalUser.isPresent()) {
@@ -44,8 +53,12 @@ public class UsersService {
         return null;
     }
 
+    public List<String> getAllUsersName() {
+        return usersRepo.findAll().stream().map(Users::getName).collect(Collectors.toList());
+    }
+
     public List<Users> getAllUsers() {
-        return usersRepo.findAll();
+        return usersRepo.findAllUsers();
     }
 
 }
