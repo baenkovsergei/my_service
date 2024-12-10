@@ -54,4 +54,13 @@ public class UsersController {
                                               @RequestBody Comment comment) {
         return ResponseEntity.ok(usersService.saveComment(id, comment));
     }
+
+    //Заполнение для тестирования
+    @PostMapping("/populate")
+    public ResponseEntity<String> populateUsers(@RequestParam Integer count,
+                                                @RequestParam String name) {
+        usersService.populateUsers(count, name);
+        return ResponseEntity.ok("Users populated:" + count);
+    }
+
 }

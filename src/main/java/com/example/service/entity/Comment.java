@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.BatchSize;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,7 +25,5 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name="cars_id")
     private Cars car;
-
-
 }
 

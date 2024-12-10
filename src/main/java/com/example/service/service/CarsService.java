@@ -1,5 +1,6 @@
 package com.example.service.service;
 
+import com.example.service.utils.RandomString;
 import com.example.service.entity.Cars;
 import com.example.service.repository.CarsRepo;
 
@@ -19,17 +20,9 @@ public class CarsService {
     private final CarsRepo carsRepo;
 
     public List<Cars> getAllCars() {
-        //return carsRepo.findAllCars();
-        return carsRepo.findAll(); //Стандартный метод
+        return carsRepo.findAllCars();
+        //return carsRepo.findAll(); //Стандартный метод
     }
-
-//    public Cars getCarIdTest(Integer id) {
-//        Cars car = carsRepo.findBy(id);
-//        if (car == null) {
-//            return null;
-//        }
-//        return car;
-//    }
 
     public Page<Cars> getAllCarsPages(int page, int size) {
         Pageable carsPage = PageRequest.of(page,size);
@@ -45,7 +38,7 @@ public class CarsService {
     }
 
     public Cars getCarById(Integer id) {
-        Optional<Cars> optionalCars = carsRepo.findCarById2(id);
+        Optional<Cars> optionalCars = carsRepo.findCarById(id);
         if (optionalCars.isPresent()) {
             return optionalCars.get();
         }
@@ -65,6 +58,17 @@ public class CarsService {
 
     public void deleteById(Integer id) {
         carsRepo.deleteById(id);
+    }
+
+    //Заполнение данными для тестирования
+    public void populateCars(Integer count){
+        int start = carsRepo.findAll().size();
+        for (Integer i = start+1; i < (count+start+1);i++) {
+            Cars car = new Cars();
+            car.setId(i);
+            car.setModel(RandomString.getRandomWord(10));
+            carsRepo.save(car);
+        }
     }
 
 }

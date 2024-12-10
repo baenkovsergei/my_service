@@ -71,4 +71,11 @@ public class CarsController {
         return ResponseEntity.ok().body(null);
     }
 
+    //Заполнение для тестирования
+    @PostMapping("/populate")
+    public ResponseEntity<String> populateCars(@RequestParam Integer count){
+        carsService.populateCars(count);
+        return ResponseEntity.ok().body("Добавлено машин:" + count);
+    }
+
 }
