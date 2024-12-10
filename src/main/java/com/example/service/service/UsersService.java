@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import com.example.service.repository.UsersRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -72,4 +73,10 @@ public class UsersService {
             usersRepo.save(user);
         }
     }
+
+    @PatchMapping("/addcategories")
+    public ResponseEntity<List<Category>> updateCategory{
+
+    }
+
 }

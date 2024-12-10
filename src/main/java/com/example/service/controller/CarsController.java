@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/cars/")
@@ -70,6 +71,12 @@ public class CarsController {
         carsService.deleteById(id);
         return ResponseEntity.ok().body(null);
     }
+
+//    @PatchMapping("/addcategory")
+//    public ResponseEntity<CarsDTO> addCategories(@RequestParam Integer id,
+//                                                 @RequestParam String category) {
+//        Optional<Cars> car =
+//    }
 
     //Заполнение для тестирования
     @PostMapping("/populate")
