@@ -1,5 +1,6 @@
 package com.example.service.service;
 
+import com.example.service.entity.Category;
 import com.example.service.entity.Users;
 import com.example.service.entity.Comment;
 import java.util.List;
@@ -22,7 +23,7 @@ public class UsersService {
     }
 
     public Users getUserById(Integer id) {
-        Optional<Users> optionalUser = usersRepo.findById(id);
+        Optional<Users> optionalUser = usersRepo.findUsersById(id);
         if (optionalUser.isPresent()) {
             return optionalUser.get();
         }
@@ -31,10 +32,10 @@ public class UsersService {
 
     public Users getUserByUsername(String username) {
         Users users = usersRepo.findUsersByUsername(username);
-        if (users != null) {
-            return users;
+        if (users == null) {
+            return null;
         }
-        return null;
+        return users;
     }
 
     public Comment saveComment(Integer userId, Comment comment) {
@@ -46,7 +47,7 @@ public class UsersService {
     }
 
     public List<Comment> getCommentById(Integer id) {
-        Optional<Users> optionalUser = usersRepo.findById(id);
+        Optional<Users> optionalUser = usersRepo.findUsersById(id);
         if (optionalUser.isPresent()) {
             return optionalUser.get().getComments();
         }
@@ -61,4 +62,14 @@ public class UsersService {
         return usersRepo.findAllUsers();
     }
 
+    //Заполнение данными для тестирования
+    public void populateUsers(Integer count, String username) {
+        int start = usersRepo.findAll().size();
+        for (Integer i = start+1; i < (count+start+1);i++) {
+            Users user = new Users();
+            user.setId(i);
+            user.setName(username + i.toString());
+            usersRepo.save(user);
+        }
+    }
 }

@@ -31,11 +31,7 @@ public class CommentController {
    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") Integer id) {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(commentService.getComById(id)));
    }
-
-   /*Выдаёт три запроса в базу, поскольку в методе сервиса выполняется доступ к трём сущностям через
-   три репозитория, для уменьшения количества запросов необходимо изменить сами сущности(???), поскольку для
-   получения комментариев необходимо знать id пользователя и машины, а чтобы их получить по имени и модели
-   необходимо выполнить запросы в таблицы пользователей и машин соответственно*/
+   
    @GetMapping("/search")
    public ResponseEntity<List<CommentDTO>> getCommByUsrCar(@RequestParam(name = "name") String name,
                                                            @RequestParam(name = "model") String model) {
@@ -51,8 +47,6 @@ public class CommentController {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
    }
 
-
-
    @PostMapping("/")
    public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,
                                                 @RequestParam(name = "commentContent") String commentContent,
@@ -61,4 +55,11 @@ public class CommentController {
       Comment comment = new Comment(id,commentContent, usersService.getUserById(userId),carsService.getCarById(carId));
       return ResponseEntity.ok(commentService.saveComment(comment));
    }
+
+   @PostMapping("/populate")
+   public ResponseEntity<String> populateComment(@RequestParam(name = "count") Integer count) {
+      commentService.populateComments(count);
+      return ResponseEntity.ok().body("Comment populated:" + count);
+   }
+
 }

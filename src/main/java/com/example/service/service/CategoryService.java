@@ -31,12 +31,16 @@ public class CategoryService {
         return null;
     }
 
-    public Category getCatById(Integer id) {
-        Optional<Category> optionalCategory = categoryRepo.findById(id);
-        if (optionalCategory.isPresent()) {
-            return optionalCategory.get();
+    //Заполнение данными для тестирования
+    public void populateCategories(Integer count){
+        int start = categoryRepo.findAll().size();
+        for (Integer i = start+1; i < (count+start+1);i++) {
+            Category category = new Category();
+            category.setId(i);
+            category.setName("Категория-" + i.toString());
+            categoryRepo.save(category);
         }
-        return null;
     }
+
 
 }

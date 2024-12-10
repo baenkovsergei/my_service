@@ -6,19 +6,32 @@ Service - done
 Controller - done
 Don't change in CarsDTO
 
-Почему FetchType.Eager не работает у аннотации ManyToMany, но работает left join fetch c.categories cat
 
-[ALL CARS(DTO), ALL CARS PAGES, ALL CARS PAGES(DTO)]
+-Сделать удобные Post, а также проверить функции Delete;
+-Сделать нормальный Id;
+-Проверить api на нормальном кол-ве данных:
+    -Сделать датасет;
+-Проверить Swagger.
+-Обернуть в Optional методы из Repositories
 
-WITHOUT FETCH AND BATCH:
-    ALL CARS(DTO): 20
-    ALL CARS PAGES: 5
-    ALL CARS PAGES(DTO): 21
 
-WITH fetch categories AND batchsize comments:
-    ALL CARS(DTO): 2
-    ALL CARS PAGES: 4
-    ALL CARS PAGES(DTO): 3
+
+CARS CONTROLLER:
+GetBuId - 1 query
+GetAllCars - 1 query
+GetAllCarsPages - 2 query (one for counting)
+SearchByModel - 1 query
+
+CATEGORIES:
+GetAllCategories - 1 query
+
+USERS CONTROLLER:
+GetAllNames - 1 query
+GetCommentsByName 'name' - 1 query
+GetOneUserById - 1 query
+GetAllUsers - 1 query
+
+
 
 
 

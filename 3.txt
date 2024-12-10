@@ -1,52 +1,20 @@
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String email;
-
-    //...
-}
-
-Post  ->  user:User
-      ->  comments:List<Comment>
-            comments[0]:Comment -> user:User
-            comments[1]:Comment -> user:User
-
-@Entity
-public class Post {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String subject;
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments = new ArrayList<>();
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private User user;
-
-    //...
-}
-
-@Entity
-public class Comment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String reply;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private Post post;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    private User user;
-
-    //...
-}
+"SEGA",
+    "GOSHA",
+    "ALEX",
+    "VOVA",
+    "ANNA",
+    "GRISHA",
+    "ANATOLIY",
+    "GEORGY",
+    "KATE",
+    "SERGEI",
+    "TIMOPHEY",
+    "OLEG",
+    "NIKOLAY",
+    "SOFIA",
+    "DARIA",
+    "VLAD",
+    "DINIS",
+    "MICHAIL",
+    "NINA",
+    "IVAN"
