@@ -94,6 +94,7 @@ public class CarsService {
         return optionalCars.get();
     }
 
+    //Не работает
     public Cars updateFewCategory (Integer carId, List<Integer> categoryIds) {
         Optional<Cars> optionalCars = carsRepo.findCarById(carId);
         if (!optionalCars.isPresent()) {
