@@ -4,7 +4,9 @@ import com.example.service.entity.Cars;
 import com.example.service.dto.CarsDTO;
 import com.example.service.mapper.CarsMapper;
 import com.example.service.service.CarsService;
+import com.example.service.entity.Category;
 
+import com.example.service.service.CategoryService;
 import org.springframework.data.domain.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ public class CarsController {
     private final CarsService carsService;
     @Autowired
     private final CarsMapper carsMapper;
+    private final CategoryService categoryService;
 
     @GetMapping("/")
     public ResponseEntity<List<CarsDTO>> getAllCars(){
@@ -72,15 +75,22 @@ public class CarsController {
         return ResponseEntity.ok().body(null);
     }
 
-//    @PatchMapping("/addcategory")
-//    public ResponseEntity<CarsDTO> addCategories(@RequestParam Integer id,
-//                                                 @RequestParam String category) {
-//        Optional<Cars> car =
-//    }
+    @PatchMapping("/addcategory")
+    public ResponseEntity<CarsDTO> addCategory(@RequestParam Integer idCar,
+                                               @RequestParam Integer idCategory) {
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.updateCategory(idCar, idCategory)));
+    }
+
+    @PatchMapping("/addcategories")
+    public ResponseEntity<CarsDTO> addCategories(@RequestParam Integer idCar,
+                                                 @RequestParam List<Integer> idCategory) {
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.updateFewCategory(idCar,idCategory)));
+
+    }
 
     //Заполнение для тестирования
     @PostMapping("/populate")
-    public ResponseEntity<String> populateCars(@RequestParam Integer count){
+    public ResponseEntity<String> populateCars(@RequestParam Integer count) {
         carsService.populateCars(count);
         return ResponseEntity.ok().body("Добавлено машин:" + count);
     }

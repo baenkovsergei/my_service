@@ -74,9 +74,4 @@ public class UsersService {
         }
     }
 
-    @PatchMapping("/addcategories")
-    public ResponseEntity<List<Category>> updateCategory{
-
-    }
-
 }

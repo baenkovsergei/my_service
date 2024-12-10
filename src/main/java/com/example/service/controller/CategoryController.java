@@ -27,10 +27,17 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<Category>> getFew(@RequestParam List<Integer> ids) {
+        return ResponseEntity.ok().body(categoryService.getFewCatById(ids));
+    }
+
     //Заполнение для тестирования
     @PostMapping("/populate")
     public ResponseEntity<String> populate(@RequestParam Integer count) {
         categoryService.populateCategories(count);
         return ResponseEntity.ok().body("Добавлено категорий:" + count.toString());
     }
+
+
 }

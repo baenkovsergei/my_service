@@ -7,6 +7,8 @@ import com.example.service.repository.CategoryRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +42,16 @@ public class CategoryService {
             category.setName("Категория-" + i.toString());
             categoryRepo.save(category);
         }
+    }
+
+    public List<Category> getFewCatById(List<Integer> ids) {
+        List<Category> categoryList = new ArrayList<>();
+        for (Integer id : ids) {
+            if (categoryRepo.findById(id).isPresent()) {
+                categoryList.add(categoryRepo.findById(id).get());
+            }
+        }
+        return categoryList;
     }
 
 
