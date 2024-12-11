@@ -1,37 +1,23 @@
-category delete [List<Cars>]
-CategoryDTO doesnt need
+CAR-CONTROLLER:
+    -GET by Id - CHECK
+    -GET by model - CHECK
+    -GET pages - 2 queries
+    -GET all - CHECK
 
-Entity - done
-Service - done
-Controller - done
-Don't change in CarsDTO
+USERS-CONTROLLER:
+    -GET all users - CHECK
+    -GET all comments by id - CHECK
+    -GET all users name - CHECK
+    -GET all comments by name - CHECK
 
+COMMENT-CONTROLLER:
+    -GET by id - CHECK
+    -GET search by Car and User - CHECK
 
--Сделать удобные Post, а также проверить функции Delete;
--Сделать нормальный Id;
--Проверить api на нормальном кол-ве данных:
-    -Сделать датасет;
--Проверить Swagger.
--Обернуть в Optional методы из Repositories
-
-
-
-CARS CONTROLLER:
-GetBuId - 1 query
-GetAllCars - 1 query
-GetAllCarsPages - 2 query (one for counting)
-SearchByModel - 1 query
-
-CATEGORIES:
-GetAllCategories - 1 query
-
-USERS CONTROLLER:
-GetAllNames - 1 query
-GetCommentsByName 'name' - 1 query
-GetOneUserById - 1 query
-GetAllUsers - 1 query
-
-
+CATEGORY-CONTROLLER:
+    -GET by id - CHECK
+    -GET by list ids - CHECK
+    -GET all category - CHECK
 
 
 

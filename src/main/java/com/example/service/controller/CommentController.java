@@ -31,16 +31,8 @@ public class CommentController {
    public ResponseEntity<CommentDTO> getComment(@PathVariable("id") Integer id) {
       return ResponseEntity.ok().body(commentMapper.toCommentDTO(commentService.getComById(id)));
    }
-   
-   @GetMapping("/search")
-   public ResponseEntity<List<CommentDTO>> getCommByUsrCar(@RequestParam(name = "name") String name,
-                                                           @RequestParam(name = "model") String model) {
-      List<Comment> comments = commentService.getComByUsrCar(name, model);
-      return ResponseEntity.ok().body(commentMapper.toCommentDTO(comments));
-   }
 
-   //Работает через один запрос к базе
-   @GetMapping("/searchV2")
+   @GetMapping("/search")
    public ResponseEntity<List<CommentDTO>> getCommByUsrCar2(@RequestParam(name = "name") String name,
                                                            @RequestParam(name = "model") String model) {
       List<Comment> comments = commentService.getComByUsrCar2(name, model);
