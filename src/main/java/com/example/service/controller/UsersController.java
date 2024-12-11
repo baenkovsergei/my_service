@@ -40,7 +40,7 @@ public class UsersController {
         return ResponseEntity.ok(usersService.getAllUsersName());
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/comments/{name}")
     public ResponseEntity<UsersDTO> getUserCommentsByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(usersMapper.toDto(usersService.getUserByUsername(name)));
     }
