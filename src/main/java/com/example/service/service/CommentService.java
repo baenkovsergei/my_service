@@ -30,17 +30,6 @@ public class CommentService {
         return null;
     }
 
-    //Неэффективно с точки зрения запросов к базе данных
-    public List<Comment> getComByUsrCar(String name,String model){
-        Integer usrId = usersRepo.findUsersByUsername(name).getId();
-        Integer carId = carsRepo.findByModel(model).getId();
-        List<Comment> comments = commentRepo.findCommByUsrCar(usrId,carId);
-        if (comments.isEmpty()) {
-            return null;
-        }
-        return comments;
-    }
-
     public List<Comment> getComByUsrCar2(String name,String model){
         List<Comment> comments = commentRepo.findCommByUsrCar(name,model);
         if (comments.isEmpty()) {
@@ -54,7 +43,7 @@ public class CommentService {
     }
 
     //Заполнение данными для тестирования
-    public void populateComments(Integer count){
+    public void populateComments(Integer count) {
         int start = commentRepo.findAll().size();
         Random random = new Random();
         int carsSize = carsRepo.findAll().size();

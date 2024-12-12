@@ -17,7 +17,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<List<Category>> getAll() {
         return ResponseEntity.ok(categoryService.findAll());
     }
@@ -27,10 +27,22 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<Category>> getFew(@RequestParam List<Integer> ids) {
+        return ResponseEntity.ok().body(categoryService.getFewCatById(ids));
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Category> add(@RequestParam String name) {
+        return ResponseEntity.ok().body(categoryService.save(name));
+    }
+
     //Заполнение для тестирования
     @PostMapping("/populate")
     public ResponseEntity<String> populate(@RequestParam Integer count) {
         categoryService.populateCategories(count);
         return ResponseEntity.ok().body("Добавлено категорий:" + count.toString());
     }
+
+
 }

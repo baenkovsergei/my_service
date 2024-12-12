@@ -21,8 +21,8 @@ public interface CarsRepo extends JpaRepository<Cars, Integer> {
 
     @EntityGraph(value = "Cars.allDetails", type = EntityGraph.EntityGraphType.FETCH)
     @Query ("""
-        select distinct c from Cars c
-        left join fetch c.categories cat
+        select c from Cars c
+        left join c.categories cat
         left join c.comments comm
     """)
     Page<Cars> getAllCarsPages(Pageable pageable);
@@ -33,15 +33,6 @@ public interface CarsRepo extends JpaRepository<Cars, Integer> {
         where cars.model = :model
     """)
     Cars findByModel(String model);
-
-    //@EntityGraph(attributePaths = {"categories"})
-//    @Query("""
-//    select distinct c from Cars c
-//    left join fetch c.categories cat
-//    left join c.comments comm
-//    where c.id = :carId
-//    """)
-//    Optional<Cars> findCarById(Integer carId);
 
     @EntityGraph(value = "Cars.allDetails", type = EntityGraph.EntityGraphType.FETCH)
     @Query("""

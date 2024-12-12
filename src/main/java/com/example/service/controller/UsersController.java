@@ -25,7 +25,7 @@ public class UsersController {
     private final CommentMapper commentMapper;
     private final UsersMapper usersMapper;
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<List<UsersDTO>> getUsers() {
         return ResponseEntity.ok(usersMapper.usersListToDto(usersService.getAllUsers()));
     }

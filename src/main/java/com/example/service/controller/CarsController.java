@@ -1,13 +1,12 @@
 package com.example.service.controller;
 
-import com.example.service.entity.Cars;
 import com.example.service.dto.CarsDTO;
+import com.example.service.entity.Cars;
 import com.example.service.mapper.CarsMapper;
 import com.example.service.service.CarsService;
-
-import org.springframework.data.domain.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,21 +21,15 @@ public class CarsController {
     @Autowired
     private final CarsMapper carsMapper;
 
-    @GetMapping("/")
+
+    @GetMapping("/all")
     public ResponseEntity<List<CarsDTO>> getAllCars(){
         List<Cars> allCars = carsService.getAllCars();
         List<CarsDTO> carsDTO = carsMapper.toCarsDTO(allCars);
         return ResponseEntity.ok().body(carsDTO);
     }
-    //testing
-    @GetMapping("/pages")
-    public ResponseEntity<Page<Cars>> getAllCarsPages(@RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "5") int size) {
-        Page<Cars> cars = carsService.getAllCarsPages(page, size);
-        return ResponseEntity.ok().body(cars);
-    }
 
-    @GetMapping("/pagesV2")
+    @GetMapping("/pages")
     public ResponseEntity<List<CarsDTO>> getAllCarsPagesV2(@RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(defaultValue = "5") int size) {
         Page<Cars> carsPage = carsService.getAllCarsPages(page,size);
@@ -47,7 +40,7 @@ public class CarsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id))); //TESTING(НАДО ВЕРНУТЬ)
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id)));
     }
 
     @GetMapping("/search")
@@ -71,11 +64,30 @@ public class CarsController {
         return ResponseEntity.ok().body(null);
     }
 
+    @PatchMapping("/addcategory")
+    public ResponseEntity<CarsDTO> addCategory(@RequestParam Integer idCar,
+                                               @RequestParam Integer idCategory) {
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.updateCategory(idCar, idCategory)));
+    }
+
+    @PatchMapping("/addcategories")
+    public ResponseEntity<CarsDTO> addCategories(@RequestParam Integer idCar,
+                                                 @RequestParam List<Integer> idCategory) {
+        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.updateFewCategory(idCar,idCategory)));
+
+    }
+
     //Заполнение для тестирования
     @PostMapping("/populate")
-    public ResponseEntity<String> populateCars(@RequestParam Integer count){
+    public ResponseEntity<String> populateCars(@RequestParam Integer count) {
         carsService.populateCars(count);
         return ResponseEntity.ok().body("Добавлено машин:" + count);
+    }
+
+    @PatchMapping("/randomcat")
+    public ResponseEntity<String> populateCarsCategory(@RequestParam Integer catCount) {
+        carsService.randomCatToAll(catCount);
+        return ResponseEntity.ok().body("Добавлено категорий:" + catCount + "ко всем машинам");
     }
 
 }

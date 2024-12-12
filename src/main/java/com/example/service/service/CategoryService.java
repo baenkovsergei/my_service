@@ -7,6 +7,7 @@ import com.example.service.repository.CategoryRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,17 @@ public class CategoryService {
         return null;
     }
 
+    //Не работает
+    public Category save(String name) {
+        Category category = new Category();
+        category.setName(name);
+        return categoryRepo.save(category);
+    }
+
+    public List<Category> getFewCatById(List<Integer> ids) {
+        return categoryRepo.findCategoryByIds(ids);
+    }
+
     //Заполнение данными для тестирования
     public void populateCategories(Integer count){
         int start = categoryRepo.findAll().size();
@@ -41,6 +53,5 @@ public class CategoryService {
             categoryRepo.save(category);
         }
     }
-
 
 }
