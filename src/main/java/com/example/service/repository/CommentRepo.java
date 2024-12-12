@@ -23,4 +23,11 @@ public interface CommentRepo extends JpaRepository<Comment, Integer> {
         where c.userOne.id = :userId and car.id = :carId
     """)
     List<Comment> findCommByUsrCar(Integer userId, Integer carId);
+
+
+    @Query("""
+        select count(c) from Comment c
+    """)
+    Integer findCount();
+
 }

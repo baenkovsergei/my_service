@@ -24,7 +24,6 @@ import java.util.Set;
                 )
         }
 )
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -32,7 +31,9 @@ import java.util.Set;
 @Table(name = "cars")
 public class Cars {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String model;
 
     @ManyToMany
@@ -45,7 +46,7 @@ public class Cars {
     Set<Category> categories;
 
 
-    @OneToMany(mappedBy="car")
+    @OneToMany(mappedBy="car", cascade = CascadeType.ALL,orphanRemoval = true)
     @BatchSize(size = 10)
     private List<Comment> comments;
 }

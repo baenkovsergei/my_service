@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CommentMapper {
+
 
     public CommentDTO toCommentDTO(Comment comment) {
         return new CommentDTO(comment.getCommentContent(),
@@ -17,10 +17,11 @@ public class CommentMapper {
                 comment.getCar().getModel());
     }
 
-    public List<CommentDTO> toCommentDTOList(List<Comment> comments) {
-        List<CommentDTO> commentDTOS = comments.stream().map(this::toCommentDTO).distinct().toList();
-        return commentDTOS;
-    }
+    //Unused
+//    public List<CommentDTO> toCommentDTOList(List<Comment> comments) {
+//        List<CommentDTO> commentDTOS = comments.stream().map(this::toCommentDTO).distinct().toList();
+//        return commentDTOS;
+//    }
 
     public List<CommentDTO> toCommentDTO(List<Comment> comments) {
         List<CommentDTO> commentsDTO = new ArrayList<>();
@@ -29,5 +30,22 @@ public class CommentMapper {
         }
         return commentsDTO;
     }
+
+//
+//    public Comment toComment(CommentDTO commentDTO) {
+//        Comment comment = new Comment();
+//        comment.setCommentContent(commentDTO.getContent());
+//        comment.setCar(carsService.getCarByModel(commentDTO.getCar()));
+//        comment.setUserOne(usersService.getUserByUsername(commentDTO.getAuthor()));
+//        return comment;
+//    }
+//
+//    public List<Comment> toComments(List<CommentDTO> commentDTOS) {
+//        List<Comment> comments = new ArrayList<>();
+//        for (CommentDTO commentDTO : commentDTOS) {
+//            comments.add(toComment(commentDTO));
+//        }
+//        return comments;
+//    }
 
 }

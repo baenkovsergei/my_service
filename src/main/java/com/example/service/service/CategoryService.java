@@ -3,7 +3,6 @@ package com.example.service.service;
 import com.example.service.entity.Category;
 import com.example.service.mapper.CategoryMapper;
 import com.example.service.repository.CategoryRepo;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +31,7 @@ public class CategoryService {
         return null;
     }
 
-    //Не работает
-    public Category save(String name) {
-        Category category = new Category();
-        category.setName(name);
+    public Category save2(Category category) {
         return categoryRepo.save(category);
     }
 

@@ -18,7 +18,7 @@ public class CarsMapper {
     public CarsDTO toCarsDTO(Cars cars) {
         return new CarsDTO(cars.getModel(),
                 cars.getCategories(),
-                commentMapper.toCommentDTOList(cars.getComments())); //Previous commentMapper.toCommentDTO(cars.getComments()));
+                commentMapper.toCommentDTO(cars.getComments())); //Previous commentMapper.toCommentDTOList(cars.getComments()));
     }
 
     public List<CarsDTO> toCarsDTO(List<Cars> cars) {

@@ -1,4 +1,4 @@
-package com.example.service.dto;import com.example.service.dto.CarsDTO;
+package com.example.service.dto;
 
 import lombok.Data;
 
@@ -14,4 +14,5 @@ public class CommentDTO {
        this.author = author;
        this.car = car;
     }
+
 }

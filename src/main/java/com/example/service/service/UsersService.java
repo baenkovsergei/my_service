@@ -1,16 +1,14 @@
 package com.example.service.service;
 
-import com.example.service.entity.Category;
-import com.example.service.entity.Users;
 import com.example.service.entity.Comment;
+import com.example.service.entity.Users;
+import com.example.service.repository.UsersRepo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import com.example.service.repository.UsersRepo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +18,12 @@ public class UsersService {
     private final UsersRepo usersRepo;
 
     public Users save(Users users) {
+        return usersRepo.save(users);
+    }
+
+    public Users save2(String name) {
+        Users users = new Users();
+        users.setName(name);
         return usersRepo.save(users);
     }
 
@@ -61,6 +65,10 @@ public class UsersService {
 
     public List<Users> getAllUsers() {
         return usersRepo.findAllUsers();
+    }
+
+    public void deleteUserById(Integer id) {
+        usersRepo.deleteById(id);
     }
 
     //Заполнение данными для тестирования

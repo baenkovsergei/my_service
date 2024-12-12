@@ -45,14 +45,26 @@ public class UsersController {
         return ResponseEntity.ok(usersMapper.toDto(usersService.getUserByUsername(name)));
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Users> createUser(@RequestBody Users users) {
         return ResponseEntity.ok(usersService.save(users));
     }
+
+    @PostMapping("/add2")
+    public ResponseEntity<Users> createUser2(@RequestParam("name") String name) {
+        return ResponseEntity.ok(usersService.save2(name));
+    }
+
     @PostMapping("/{id}/comment")
     public ResponseEntity<Comment> addComment(@PathVariable Integer id,
                                               @RequestBody Comment comment) {
         return ResponseEntity.ok(usersService.saveComment(id, comment));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Users> deleteUserById(@PathVariable("id") Integer id) {
+        usersService.deleteUserById(id);
+        return ResponseEntity.ok(null);
     }
 
     //Заполнение для тестирования

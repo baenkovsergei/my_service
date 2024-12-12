@@ -5,8 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 1.txt
-2.txt
-3.txt
+
 ### STS ###
 .apt_generated
 .classpath

@@ -10,15 +10,21 @@ import java.util.List;
 @Component
 public class CategoryMapper {
 
-    public CategoryDTO categoryToDto(Category category) {
+    public CategoryDTO ToDto(Category category) {
         return new CategoryDTO(category.getName());
     }
 
     public List<CategoryDTO> listCatToDto(List<Category> categories) {
         List<CategoryDTO> categoryDTOS = new ArrayList<>();
         for (Category category : categories) {
-            categoryDTOS.add(categoryToDto(category));
+            categoryDTOS.add(ToDto(category));
         }
         return categoryDTOS;
+    }
+
+    public Category DTOToCategory(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        category.setName(categoryDTO.getName());
+        return category;
     }
 }

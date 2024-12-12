@@ -1,12 +1,14 @@
 package com.example.service.dto;
+
 import com.example.service.entity.Category;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 public class CarsDTO {
     
     private String model;

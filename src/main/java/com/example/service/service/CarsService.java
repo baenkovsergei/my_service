@@ -51,8 +51,13 @@ public class CarsService {
     }
 
     public Cars saveCars(Cars car) {
-        Cars savedCar = carsRepo.save(car);
-        return savedCar;
+        return carsRepo.save(car);
+    }
+
+    public Cars createCar(String model) {
+        Cars car = new Cars();
+        car.setModel(model);
+        return carsRepo.save(car);
     }
 
     public Cars updateCars (Cars car) {
