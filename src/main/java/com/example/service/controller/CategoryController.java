@@ -36,18 +36,8 @@ public class CategoryController {
         return ResponseEntity.ok().body(categoryService.getFewCatById(ids));
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<Category> add(@RequestParam String name) {
-//        return ResponseEntity.ok().body(categoryService.save(name));
-//    }
-
-//    @PostMapping("/add")
-//    public ResponseEntity<Category> add2(@RequestBody CategoryDTO category) {
-//        return ResponseEntity.ok().body(categoryService.save2(categoryMapper.DTOToCategory(category)));
-//    }
-
     @PostMapping("/add")
-    public ResponseEntity<Category> add2(@RequestBody CategoryDTO category) {
+    public ResponseEntity<Category> add(@RequestBody CategoryDTO category) {
 
         Category category1 = categoryMapper.DTOToCategory(category);
 
@@ -60,6 +50,5 @@ public class CategoryController {
         categoryService.populateCategories(count);
         return ResponseEntity.ok().body("Добавлено категорий:" + count.toString());
     }
-
 
 }

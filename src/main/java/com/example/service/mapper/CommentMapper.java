@@ -17,12 +17,8 @@ public class CommentMapper {
                 comment.getCar().getModel());
     }
 
-    //Unused
-//    public List<CommentDTO> toCommentDTOList(List<Comment> comments) {
-//        List<CommentDTO> commentDTOS = comments.stream().map(this::toCommentDTO).distinct().toList();
-//        return commentDTOS;
-//    }
 
+    //Если добавить автомобиль с пустыми комментами вызывает NullPointerException в цикле
     public List<CommentDTO> toCommentDTO(List<Comment> comments) {
         List<CommentDTO> commentsDTO = new ArrayList<>();
         for (Comment comment : comments) {
@@ -31,7 +27,6 @@ public class CommentMapper {
         return commentsDTO;
     }
 
-//
 //    public Comment toComment(CommentDTO commentDTO) {
 //        Comment comment = new Comment();
 //        comment.setCommentContent(commentDTO.getContent());

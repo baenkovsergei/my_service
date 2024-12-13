@@ -4,6 +4,7 @@ import com.example.service.dto.CarsDTO;
 import com.example.service.entity.Cars;
 import com.example.service.mapper.CarsMapper;
 import com.example.service.mapper.CommentMapper;
+import com.example.service.projections.CarFull;
 import com.example.service.service.CarsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,27 +41,26 @@ public class CarsController {
         return ResponseEntity.ok().body(cars);
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
+//        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id)));
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<CarsDTO> getCarById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarById(id)));
+    public ResponseEntity<CarFull> getCarById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(carsService.getCarById(id));
     }
+
+
 
     @GetMapping("/search")
     public ResponseEntity<CarsDTO> searchCars(@RequestParam("model") String model) {
         return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.getCarByModel(model)));
     }
 
-        //Не работает
-//    @PostMapping("/add")
-//    public ResponseEntity<CarsDTO> saveCar(@RequestParam("model") String model) {
-//        Cars car = new Cars();
-//        car.setModel(model);
-//        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.saveCars(car)));
-//    }
-
-    @PostMapping("/add")
-    public ResponseEntity<CarsDTO> addCar(@RequestParam String model){
-        return ResponseEntity.ok().body(carsMapper.toCarsDTO(carsService.createCar(model)));
+     @PostMapping("/add")
+    public ResponseEntity<Cars> addCar(@RequestParam String model){
+        return ResponseEntity.ok().body(carsService.createCar(model));
     }
 
     @PutMapping("/")

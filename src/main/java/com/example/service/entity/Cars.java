@@ -1,10 +1,10 @@
 package com.example.service.entity;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 import java.util.List;
@@ -26,7 +26,8 @@ import java.util.Set;
 )
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "cars")
 public class Cars {
@@ -44,7 +45,6 @@ public class Cars {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     Set<Category> categories;
-
 
     @OneToMany(mappedBy="car", cascade = CascadeType.ALL,orphanRemoval = true)
     @BatchSize(size = 10)

@@ -1,15 +1,15 @@
 package com.example.service.service;
 
+import com.example.service.entity.Cars;
 import com.example.service.entity.Category;
+import com.example.service.projections.CarFull;
+import com.example.service.repository.CarsRepo;
 import com.example.service.repository.CategoryRepo;
 import com.example.service.utils.RandomString;
-import com.example.service.entity.Cars;
-import com.example.service.repository.CarsRepo;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,8 +42,16 @@ public class CarsService {
         return cars;
     }
 
-    public Cars getCarById(Integer id) {
-        Optional<Cars> optionalCars = carsRepo.findCarById(id);
+//    public Cars getCarById(Integer id) {
+//        Optional<Cars> optionalCars = carsRepo.findCarById(id);
+//        if (optionalCars.isPresent()) {
+//            return optionalCars.get();
+//        }
+//        return null;
+//    }
+
+    public CarFull getCarById(Integer id) {
+        Optional<CarFull> optionalCars = carsRepo.findCarsById(id);
         if (optionalCars.isPresent()) {
             return optionalCars.get();
         }
@@ -83,17 +91,14 @@ public class CarsService {
 
         optionalCars.get().getCategories().add(optionalCategory.get());
         carsRepo.save(optionalCars.get());
-
         return optionalCars.get();
     }
-
 
     //Заполнение данными для тестирования
     public void populateCars(Integer count){
         int start = carsRepo.findAll().size();
         for (Integer i = start+1; i < (count+start+1);i++) {
             Cars car = new Cars();
-            car.setId(i);
             car.setModel(RandomString.getRandomWord(10));
             carsRepo.save(car);
         }

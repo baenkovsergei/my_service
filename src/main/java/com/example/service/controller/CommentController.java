@@ -42,14 +42,14 @@ public class CommentController {
    }
 
    // Old adding
-   @PostMapping("/")
-   public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,
-                                                @RequestParam(name = "commentContent") String commentContent,
-                                                @RequestParam(name = "user_id") Integer userId,
-                                                @RequestParam(name = "car_id") Integer carId ) {
-      Comment comment = new Comment(id,commentContent, usersService.getUserById(userId),carsService.getCarById(carId));
-      return ResponseEntity.ok(commentService.saveComment(comment));
-   }
+//   @PostMapping("/")
+//   public ResponseEntity<Comment> createComment(@RequestParam(name = "id") Integer id,
+//                                                @RequestParam(name = "commentContent") String commentContent,
+//                                                @RequestParam(name = "user_id") Integer userId,
+//                                                @RequestParam(name = "car_id") Integer carId ) {
+//      Comment comment = new Comment(id,commentContent, usersService.getUserById(userId),carsService.getCarById(carId));
+//      return ResponseEntity.ok(commentService.saveComment(comment));
+//   }
 
    @PostMapping("/add")
    public ResponseEntity<?> addComment(@RequestBody CommentDTO commentDTO){

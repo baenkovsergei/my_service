@@ -1,15 +1,16 @@
 package com.example.service.entity;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "category")
 public class Category {

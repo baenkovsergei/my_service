@@ -70,7 +70,6 @@ public class CommentService {
         int usersSize = usersRepo.findAll().size();
         for (Integer i = start+1; i < (count+start+1);i++) {
             Comment comment = new Comment();
-            comment.setId(i);
             comment.setCommentContent(RandomString.getRandomComment(15,8));
             comment.setCar(carsRepo.findById(random.nextInt(carsSize)).get());
             comment.setUserOne(usersRepo.findById(random.nextInt(usersSize)).get());
